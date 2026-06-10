@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giovanna & Nicolas</title>
+  <link rel="icon" id="dynamic-favicon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700&family=Montserrat+Alternates:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      height: auto;
+      overflow-x: hidden;
+      background-color: #100c18;
+    }
+
+    .navbar {
+      z-index: 999;
+      padding: 24px 30px;
+      background-color: transparent;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .navbar-wrapper {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+
+    .nav-menu-block {
+      gap: 8px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      border-radius: 16px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background-color: rgba(113, 113, 113, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 20px;
+    }
+
+    .nav-link {
+      color: #fff;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #FBF6E8;
+    }
+
+    @media (max-width: 991px) {
+      .nav-menu-block {
+        gap: 4px;
+        padding: 10px 14px;
+      }
+
+      .nav-link {
+        font-size: 11px;
+        padding: 5px 8px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .navbar {
+        padding: 12px 10px;
+      }
+
+      .nav-menu-block {
+        gap: 2px;
+        padding: 8px 10px;
+      }
+
+      .nav-link {
+        font-size: 10px;
+        padding: 4px 6px;
+      }
+    }
+
+    section[id] {
+      scroll-margin-top: 80px;
+    }
+
+    /* ── Glass panel effect ── */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transition: 0.7s ease-in-out;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .glass-panel:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 15px 40px rgba(236, 106, 35, 0.08);
+    }
+
+    .glass-panel.reveal.active:hover {
+      transform: translateY(-4px);
+    }
+
+    .glass-panel:hover::before {
+      left: 100%;
+    }
+
+    /* ── Reveal on scroll ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.9s cubic-bezier(0.5, 0, 0, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+
+    .hero-section {
+      background-image: url("assets/hero_image.jpeg");
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 60%);
+      pointer-events: none;
+    }
+
+    .hero-content-area {
+      flex-flow: column;
+      justify-content: flex-end;
+      align-items: center;
+      height: 100%;
+      min-height: 100%;
+      display: flex;
+      position: relative;
+    }
+
+    .hero-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(4rem, 12vw, 14rem);
+      font-weight: 400;
+      line-height: 1;
+      text-align: center;
+      margin: 0;
+      padding: 0 1rem;
+      position: absolute;
+      bottom: 60px;
+      width: 100%;
+      pointer-events: none;
+      background: linear-gradient(180deg, #FBF6E8 26.5%, rgba(251, 246, 232, 0) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-object {
+      position: absolute;
+      bottom: 20px;
+      width: 28px;
+      height: auto;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 991px) {
+      .hero-section {
+        background-attachment: scroll;
+      }
+
+      .hero-title {
+        font-size: clamp(3rem, 10vw, 8rem);
+        bottom: 40px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .hero-title {
+        font-size: clamp(2.5rem, 12vw, 5rem);
+        bottom: 30px;
+      }
+    }
+
+    /* ── O Casal ── */
+    .o-casal-section {
+      background-color: #100c18;
+      padding: 120px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .o-casal-date {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 400;
+      color: #FBF6E8;
+      letter-spacing: 0.15em;
+      margin-bottom: 60px;
+    }
+
+    .o-casal-date .date-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #ec6a23;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin: 0 20px;
+    }
+
+    .o-casal-text {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: #c8c8c8;
+      max-width: 720px;
+      margin-bottom: 32px;
+    }
+
+    .o-casal-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .o-casal-text .highlight {
+      color: #FBF6E8;
+      font-weight: 600;
+    }
+
+    .o-casal-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ec6a23, transparent);
+      margin: 8px auto 32px;
+    }
+
+    /* ── Countdown ── */
+    .countdown {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .countdown-number {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: #FBF6E8;
+      line-height: 1;
+    }
+
+    .countdown-label {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #ec6a23;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .countdown-separator {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #ec6a23;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 479px) {
+      .countdown {
+        gap: 16px;
+        margin-top: 36px;
+      }
+
+      .countdown-label {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .o-casal-section {
+        padding: 80px 20px;
+      }
+
+      .o-casal-date {
+        margin-bottom: 40px;
+      }
+
+      .o-casal-date .date-dot {
+        width: 6px;
+        height: 6px;
+        margin: 0 12px;
+      }
+
+      .o-casal-text {
+        font-size: 16px;
+        line-height: 1.7;
+      }
+    }
+
+    /* ── Casal Fotos (parallax scroll clip — about-section style) ── */
+    .casal-fotos-section {
+      height: 100vh;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      gap: 0;
+      font-size: 0;
+    }
+
+    .casal-foto {
+      width: 33.334%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 33.4vw 100vh;
+    }
+
+    .casal-foto-1 {
+      background-image: url("assets/casal1.jpg");
+      background-position: left center;
+    }
+    .casal-foto-2 {
+      background-image: url("assets/casal2.jpg");
+      background-position: center center;
+    }
+    .casal-foto-3 {
+      background-image: url("assets/casal3.jpg");
+      background-position: right center;
+    }
+
+    @media (max-width: 991px) {
+      .casal-foto {
+        background-attachment: scroll;
+      }
+    }
+
+    /* Content overlay on casal-fotos (about-section style) */
+    .casal-fotos-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      padding: 100px 30px;
+    }
+
+    .casal-fotos-left-shadow {
+      background-image: linear-gradient(90deg, rgba(6, 6, 6, 0.85) 30%, transparent);
+      pointer-events: none;
+      width: 55%;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .casal-fotos-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .casal-fotos-border {
+      background-color: #fff;
+      width: 1px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: absolute;
+      bottom: 0;
+      left: 40px;
+    }
+
+    .casal-fotos-horizontal-border {
+      background-color: #fff;
+      min-width: 80px;
+      min-height: 1px;
+      margin-bottom: 40px;
+    }
+
+    .casal-fotos-bottom {
+      margin-left: 140px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 500px;
+    }
+
+    .casal-fotos-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: #FBF6E8;
+      letter-spacing: 0.05em;
+    }
+
+    .casal-fotos-paragraph {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #c8c8c8;
+    }
+
+    @media (max-width: 991px) {
+      .casal-fotos-bottom {
+        margin-left: 60px;
+        max-width: 400px;
+      }
+
+      .casal-fotos-border {
+        left: 20px;
+      }
+
+      .casal-fotos-left-shadow {
+        width: 70%;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .casal-fotos-overlay {
+        padding: 60px 20px;
+      }
+
+      .casal-fotos-bottom {
+        margin-left: 40px;
+        max-width: 100%;
+      }
+
+      .casal-fotos-border {
+        left: 15px;
+      }
+
+      .casal-fotos-horizontal-border {
+        min-width: 40px;
+        margin-bottom: 20px;
+      }
+
+      .casal-fotos-paragraph {
+        font-size: 14px;
+      }
+
+      .casal-fotos-left-shadow {
+        width: 85%;
+      }
+    }
+
+    /* ── Carrossel ── */
+    .carrossel-section {
+      background-color: #100c18;
+      padding: 80px 0;
+      overflow: hidden;
+    }
+
+    .carrossel-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: carrossel-scroll 60s linear infinite;
+    }
+
+    .carrossel-track img {
+      height: 400px;
+      width: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    @keyframes carrossel-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 767px) {
+      .carrossel-track img {
+        height: 280px;
+      }
+
+      .carrossel-section {
+        padding: 60px 0;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .carrossel-track img {
+        height: 220px;
+      }
+    }
+
+    /* ── Cerimônia ── */
+    .cerimonia-section {
+      background-color: #100c18;
+      padding: 120px 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cerimonia-container {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      gap: 40px;
+      align-items: stretch;
+      padding: 24px;
+    }
+
+    .cerimonia-image {
+      width: 50%;
+      flex-shrink: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cerimonia-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cerimonia-info {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cerimonia-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: #FBF6E8;
+      letter-spacing: 0.05em;
+    }
+
+    .cerimonia-local {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #FBF6E8;
+    }
+
+    .cerimonia-endereco {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #c8c8c8;
+    }
+
+    .cerimonia-mapa {
+      flex: 1;
+      min-height: 300px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #333;
+    }
+
+    .cerimonia-mapa iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    @media (max-width: 991px) {
+      .cerimonia-container {
+        flex-direction: column;
+      }
+
+      .cerimonia-image,
+      .cerimonia-info {
+        width: 100%;
+      }
+
+      .cerimonia-image {
+        max-height: 400px;
+      }
+
+      .cerimonia-section {
+        padding: 80px 20px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .cerimonia-section {
+        padding: 60px 16px;
+      }
+
+      .cerimonia-mapa {
+        min-height: 250px;
+      }
+    }
+
+    /* ── Hotéis ── */
+    .hoteis-section {
+      background-color: #100c18;
+      padding: 120px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hoteis-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: #FBF6E8;
+      letter-spacing: 0.05em;
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .hoteis-list {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    .hotel-card {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .hotel-card.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .hotel-image {
+      width: 50%;
+      flex-shrink: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hotel-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .hotel-card:hover .hotel-image img {
+      transform: scale(1.05);
+    }
+
+    .hotel-info {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hotel-name {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: #FBF6E8;
+      line-height: 1.2;
+    }
+
+    .hotel-rating {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hotel-stars {
+      display: flex;
+      gap: 4px;
+    }
+
+    .hotel-star {
+      width: 28px;
+      height: 28px;
+    }
+
+    .hotel-star-full {
+      color: #ec6a23;
+    }
+
+    .hotel-star-half {
+      color: #ec6a23;
+      position: relative;
+    }
+
+    .hotel-star-empty {
+      color: #333;
+    }
+
+    .hotel-score {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #FBF6E8;
+    }
+
+    .hotel-reviews {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #c8c8c8;
+    }
+
+    .hotel-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #ec6a23;
+      text-decoration: none;
+      padding: 10px 24px;
+      border: 1px solid #ec6a23;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      width: fit-content;
+      margin-top: 8px;
+    }
+
+    .hotel-link:hover {
+      background-color: #ec6a23;
+      color: #FBF6E8;
+    }
+
+    .hotel-link-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .hotel-link:hover .hotel-link-arrow {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 991px) {
+      .hotel-card,
+      .hotel-card.reverse {
+        flex-direction: column;
+      }
+
+      .hotel-image,
+      .hotel-info {
+        width: 100%;
+      }
+
+      .hotel-image {
+        aspect-ratio: 16 / 9;
+      }
+
+      .hoteis-section {
+        padding: 80px 20px;
+      }
+
+      .hoteis-list {
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .hoteis-section {
+        padding: 60px 16px;
+      }
+
+      .hoteis-title {
+        margin-bottom: 48px;
+      }
+
+      .hoteis-list {
+        gap: 40px;
+      }
+
+      .hotel-card {
+        gap: 24px;
+      }
+    }
+    /* ── Lista de Presentes ── */
+    .presentes-section {
+      background-color: #100c18;
+      padding: 120px 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .presentes-container {
+      max-width: 800px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .presentes-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: #FBF6E8;
+      letter-spacing: 0.05em;
+      text-align: center;
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .presentes-image-wrapper {
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .presentes-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .presentes-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 400px;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #FBF6E8;
+      text-decoration: none;
+      padding: 16px 32px;
+      background-color: #ec6a23;
+      border: none;
+      border-radius: 0 0 12px 12px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .presentes-btn:hover {
+      background-color: #d45a1a;
+      box-shadow: 0 8px 30px rgba(236, 106, 35, 0.3);
+    }
+
+    .presentes-btn-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .presentes-btn:hover .presentes-btn-arrow {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 991px) {
+      .presentes-section {
+        padding: 80px 20px;
+      }
+
+      .presentes-container {
+        padding: 30px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .presentes-section {
+        padding: 60px 16px;
+      }
+
+      .presentes-container {
+        padding: 24px;
+      }
+
+      .presentes-title {
+        margin-bottom: 32px;
+      }
+    }
+    /* ── Recados ── */
+    .recados-section {
+      background-color: #100c18;
+      padding: 120px 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .recados-container {
+      max-width: 800px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .recados-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: #FBF6E8;
+      letter-spacing: 0.05em;
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .recados-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .recados-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .recados-label {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #c8c8c8;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .recados-input,
+    .recados-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #FBF6E8;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .recados-input:focus,
+    .recados-textarea:focus {
+      border-color: #ec6a23;
+      box-shadow: 0 0 0 3px rgba(236, 106, 35, 0.15);
+    }
+
+    .recados-input::placeholder,
+    .recados-textarea::placeholder {
+      color: rgba(200, 200, 200, 0.4);
+    }
+
+    .recados-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .recados-submit {
+      align-self: flex-start;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #FBF6E8;
+      background-color: #ec6a23;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 36px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .recados-submit:hover {
+      background-color: #d45a1a;
+      box-shadow: 0 8px 30px rgba(236, 106, 35, 0.3);
+    }
+
+    .recados-mensagens {
+      width: 100%;
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .recados-mensagens-title {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #c8c8c8;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .recado-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      animation: recado-in 0.5s cubic-bezier(0.5, 0, 0, 1);
+    }
+
+    @keyframes recado-in {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .recado-autor {
+      font-family: 'Scheherazade New', serif;
+      font-size: 1.3rem;
+      color: #FBF6E8;
+      margin-bottom: 4px;
+    }
+
+    .recado-texto {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #c8c8c8;
+    }
+
+    .recados-vazio {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 14px;
+      color: rgba(200, 200, 200, 0.4);
+      text-align: center;
+      padding: 24px;
+    }
+
+    @media (max-width: 991px) {
+      .recados-section {
+        padding: 80px 20px;
+      }
+
+      .recados-container {
+        padding: 30px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .recados-section {
+        padding: 60px 16px;
+      }
+
+      .recados-container {
+        padding: 24px;
+      }
+
+      .recados-submit {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-wrapper">
+      <div class="nav-menu-block">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#o-casal">O casal</a>
+        <a class="nav-link" href="#cerimonia">Cerimônia</a>
+        <a class="nav-link" href="#hoteis">Indicações de Hotéis</a>
+        <a class="nav-link" href="#saloes">Salões de Beleza</a>
+        <a class="nav-link" href="#lista-presentes">Lista de Presentes</a>
+
+        <a class="nav-link" href="#recados">Recados</a>
+      </div>
+    </div>
+  </nav>
+  <section class="hero-section" id="home">
+    <div class="hero-content-area">
+      <h1 class="hero-title">Giovanna & Nicolas</h1>
+      <img alt="" class="hero-object" src="assets/695292f5208a34bcb18e3d9a_Icon__ca89d5701200.svg" />
+    </div>
+  </section>
+
+  <script src="assets/gsap_b1203ff1d74e.js"></script>
+  <script src="assets/ScrollTrigger_cc09781c55bb.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.to(".hero-title", {
+      y: -150,
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero-section",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+    gsap.to(".hero-object", {
+      y: -80,
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero-section",
+        start: "top top",
+        end: "80% top",
+        scrub: true
+      }
+    });
+
+    // ── Casal fotos section (border animation stays in GSAP) ──
+    gsap.set(".casal-fotos-border", { height: "0%" });
+
+    ScrollTrigger.create({
+      trigger: ".casal-fotos-section",
+      start: "top 60%",
+      once: true,
+      onEnter: function() {
+        gsap.to(".casal-fotos-border", { height: "100%", duration: 1.8, ease: "power3.out" });
+      }
+    });
+
+    // ── Cerimônia image (parallax zoom stays in GSAP) ──
+    gsap.set(".cerimonia-image", { opacity: 0, x: -120 });
+
+    ScrollTrigger.create({
+      trigger: ".cerimonia-section",
+      start: "top 60%",
+      once: true,
+      onEnter: function() {
+        gsap.to(".cerimonia-image", { opacity: 1, x: 0, duration: 1.5, ease: "power3.out" });
+      }
+    });
+
+    gsap.fromTo(".cerimonia-image img",
+      { scale: 1.15 },
+      { scale: 1, ease: "none",
+        scrollTrigger: {
+          trigger: ".cerimonia-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      }
+    );
+
+    // ── Navbar ──
+    // Fade in on load
+    gsap.fromTo(".navbar",
+      { opacity: 0, y: -30 },
+      { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: "power2.out" }
+    );
+
+    // Hero title fade in on load
+    gsap.fromTo(".hero-title",
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 1.2, delay: 0.5, ease: "power2.out" }
+    );
+
+
+    // ── Reveal on scroll (from design-system.html) ──
+    function revealOnScroll() {
+      var reveals = document.querySelectorAll('.reveal');
+      var windowHeight = window.innerHeight;
+      reveals.forEach(function(el) {
+        var top = el.getBoundingClientRect().top;
+        if (top < windowHeight - 100) {
+          el.classList.add('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+
+  </script>
+
+
+  <section class="o-casal-section">
+    <h2 class="o-casal-date reveal">12 <span class="date-dot"></span> 12 <span class="date-dot"></span> 2026</h2>
+    <div class="o-casal-divider reveal reveal-delay-1"></div>
+    <p class="o-casal-text reveal reveal-delay-2">
+      Criamos esse site para compartilhar com vocês os detalhes da organização do <span class="highlight">nosso casamento</span>. Estamos muito felizes e contamos com a <span class="highlight">presença de todos</span> no nosso grande dia! Aqui vocês encontrarão também dicas para <span class="highlight">hospedagem</span>, <span class="highlight">salão de beleza</span>, <span class="highlight">local</span> e muito mais.
+    </p>
+    <p class="o-casal-text reveal reveal-delay-3">
+      É importante <span class="highlight">confirmar sua presença</span> clicando no menu <span class="highlight">"Confirme sua Presença"</span> e preenchendo os dados necessários. Para nos presentear, escolha qualquer item da <span class="highlight">Lista de Casamento</span>. Fiquem à vontade! <span class="highlight">Aguardamos vocês no nosso grande dia!</span>
+    </p>
+    <div class="countdown reveal reveal-delay-4" id="countdown">
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-days">000</span>
+        <span class="countdown-label">Dias</span>
+      </div>
+      <span class="countdown-separator">:</span>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-hours">00</span>
+        <span class="countdown-label">Horas</span>
+      </div>
+      <span class="countdown-separator">:</span>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-minutes">00</span>
+        <span class="countdown-label">Minutos</span>
+      </div>
+      <span class="countdown-separator">:</span>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-seconds">00</span>
+        <span class="countdown-label">Segundos</span>
+      </div>
+    </div>
+    <script>
+      (function() {
+        var wedding = new Date("2026-12-12T16:00:00-03:00").getTime();
+        function update() {
+          var now = Date.now();
+          var diff = wedding - now;
+          if (diff <= 0) {
+            document.getElementById("cd-days").textContent = "0";
+            document.getElementById("cd-hours").textContent = "00";
+            document.getElementById("cd-minutes").textContent = "00";
+            document.getElementById("cd-seconds").textContent = "00";
+            return;
+          }
+          var d = Math.floor(diff / 86400000);
+          var h = Math.floor((diff % 86400000) / 3600000);
+          var m = Math.floor((diff % 3600000) / 60000);
+          var s = Math.floor((diff % 60000) / 1000);
+          document.getElementById("cd-days").textContent = d;
+          document.getElementById("cd-hours").textContent = h < 10 ? "0" + h : h;
+          document.getElementById("cd-minutes").textContent = m < 10 ? "0" + m : m;
+          document.getElementById("cd-seconds").textContent = s < 10 ? "0" + s : s;
+        }
+        update();
+        setInterval(update, 1000);
+      })();
+    </script>
+  </section>
+
+
+  <section class="casal-fotos-section" id="o-casal">
+    <div class="casal-foto casal-foto-1"></div>
+    <div class="casal-foto casal-foto-2"></div>
+    <div class="casal-foto casal-foto-3"></div>
+    <div class="casal-fotos-left-shadow"></div>
+    <div class="casal-fotos-overlay">
+      <div class="casal-fotos-content">
+        <div class="casal-fotos-border">
+          <div class="casal-fotos-horizontal-border"></div>
+        </div>
+        <div class="casal-fotos-bottom">
+          <h2 class="casal-fotos-title reveal">O Casal</h2>
+          <p class="casal-fotos-paragraph reveal reveal-delay-1">
+            Em meio aos caminhos da vida, acreditamos que nada acontece por acaso — e que foi Deus quem guiou nossos passos até que eles se encontrassem. Desde então, nossa história tem sido construída com amor, paciência e propósito, fortalecida nos detalhes do dia a dia e na certeza de que fomos escolhidos um para o outro. Entre aprendizados, alegrias e desafios, seguimos lado a lado, confiando que cada capítulo tem sido escrito pelas mãos d'Aquele que escreveu tudo isso antes mesmo de nós imaginarmos.
+          </p>
+          <p class="casal-fotos-paragraph reveal reveal-delay-2">
+            Agora, com o coração cheio de gratidão, damos um passo muito especial: vamos nos casar. Estamos preparando esse momento com carinho e fé, desejando celebrar não apenas a nossa união, mas tudo o que Deus tem realizado em nossas vidas. Será uma alegria compartilhar esse dia com as pessoas que amamos, celebrando o início de uma nova fase, firmada no amor, na cumplicidade e nas bênçãos que ainda estão por vir.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="carrossel-section">
+    <div class="carrossel-track">
+      <img src="assets/carrossel1.jpg" alt="" />
+      <img src="assets/carrossel2.jpg" alt="" />
+      <img src="assets/carrossel3.jpg" alt="" />
+      <img src="assets/carrossel4.jpg" alt="" />
+      <img src="assets/carrossel5.jpg" alt="" />
+      <img src="assets/carrossel6.jpg" alt="" />
+      <img src="assets/carrossel7.jpg" alt="" />
+      <img src="assets/carrossel8.jpg" alt="" />
+      <img src="assets/carrossel9.jpg" alt="" />
+      <img src="assets/carrossel10.jpg" alt="" />
+      <img src="assets/carrossel11.jpg" alt="" />
+      <img src="assets/carrossel12.jpg" alt="" />
+      <img src="assets/carrossel1.jpg" alt="" />
+      <img src="assets/carrossel2.jpg" alt="" />
+      <img src="assets/carrossel3.jpg" alt="" />
+      <img src="assets/carrossel4.jpg" alt="" />
+      <img src="assets/carrossel5.jpg" alt="" />
+      <img src="assets/carrossel6.jpg" alt="" />
+      <img src="assets/carrossel7.jpg" alt="" />
+      <img src="assets/carrossel8.jpg" alt="" />
+      <img src="assets/carrossel9.jpg" alt="" />
+      <img src="assets/carrossel10.jpg" alt="" />
+      <img src="assets/carrossel11.jpg" alt="" />
+      <img src="assets/carrossel12.jpg" alt="" />
+    </div>
+  </section>
+
+
+  <section class="cerimonia-section" id="cerimonia">
+    <div class="cerimonia-container glass-panel">
+      <div class="cerimonia-image">
+        <img src="assets/cerimonia.png" alt="Local da Cerimônia" />
+      </div>
+      <div class="cerimonia-info">
+        <h2 class="cerimonia-title reveal">Cerimônia</h2>
+        <p class="cerimonia-local reveal reveal-delay-1">Saint Jardin</p>
+        <p class="cerimonia-endereco reveal reveal-delay-2">
+          A cerimônia iniciará pontualmente às 16 horas, contamos com vocês!!<br /><br />
+          12 de dezembro de 2026.<br /><br />
+          Rua Estrada da Aparecida, 1330<br />
+          Km 125,5 da Rodovia Raposo Tavares<br />
+          Araçoiaba da Serra - SP, 18190-000
+        </p>
+        <div class="cerimonia-mapa reveal reveal-delay-3">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.8!2d-47.6900822!3d-23.5444458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c5eb2680275c57%3A0x6a205f401f698f3e!2sSaint%20Jardin!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hoteis-section" id="hoteis">
+    <h2 class="hoteis-title reveal">Indicações de Hotéis</h2>
+    <div class="hoteis-list">
+
+      <!-- Novotel Sorocaba — imagem à esquerda -->
+      <div class="hotel-card glass-panel reveal">
+        <div class="hotel-image">
+          <img src="assets/novohotel.png" alt="Novotel Sorocaba" />
+        </div>
+        <div class="hotel-info">
+          <h3 class="hotel-name">Novotel Sorocaba</h3>
+          <div class="hotel-rating">
+            <div class="hotel-stars">
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-empty" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="hotel-score">4,3</span>
+            <span class="hotel-reviews">Google</span>
+          </div>
+          <a class="hotel-link" href="https://share.google/RGeal1kmzwOMYXj1u" target="_blank" rel="noopener">
+            Ver no Google <span class="hotel-link-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Ibis Budget Sorocaba — imagem à direita -->
+      <div class="hotel-card reverse glass-panel reveal">
+        <div class="hotel-image">
+          <img src="assets/ibisbudget.png" alt="Ibis Budget Sorocaba" />
+        </div>
+        <div class="hotel-info">
+          <h3 class="hotel-name">Ibis Budget Sorocaba</h3>
+          <div class="hotel-rating">
+            <div class="hotel-stars">
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-empty" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="hotel-score">4,0</span>
+            <span class="hotel-reviews">Google</span>
+          </div>
+          <a class="hotel-link" href="https://share.google/NYfcEf4uf4eAHuJyU" target="_blank" rel="noopener">
+            Ver no Google <span class="hotel-link-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Ibis Sorocaba — imagem à esquerda -->
+      <div class="hotel-card glass-panel reveal">
+        <div class="hotel-image">
+          <img src="assets/ibis.png" alt="Ibis Sorocaba" />
+        </div>
+        <div class="hotel-info">
+          <h3 class="hotel-name">Ibis Sorocaba</h3>
+          <div class="hotel-rating">
+            <div class="hotel-stars">
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-empty" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="hotel-score">4,2</span>
+            <span class="hotel-reviews">Google</span>
+          </div>
+          <a class="hotel-link" href="https://share.google/UTVonfJ9UbcYtrOQq" target="_blank" rel="noopener">
+            Ver no Google <span class="hotel-link-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hotel Fraquito — imagem à direita -->
+      <div class="hotel-card reverse glass-panel reveal">
+        <div class="hotel-image">
+          <img src="assets/fraquito.png" alt="Hotel Fraquito" />
+        </div>
+        <div class="hotel-info">
+          <h3 class="hotel-name">Hotel Fraquito</h3>
+          <div class="hotel-rating">
+            <div class="hotel-stars">
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-empty" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="hotel-score">4,1</span>
+            <span class="hotel-reviews">Google</span>
+          </div>
+          <a class="hotel-link" href="https://www.google.com/search?client=opera-gx&q=hotel+fraquito&sourceid=opera&ie=UTF-8&oe=UTF-8" target="_blank" rel="noopener">
+            Ver no Google <span class="hotel-link-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="hoteis-section" id="saloes">
+    <h2 class="hoteis-title reveal">Salões de Beleza</h2>
+    <div class="hoteis-list">
+
+      <!-- MDM.Studio — imagem à esquerda -->
+      <div class="hotel-card glass-panel reveal">
+        <div class="hotel-image">
+          <img src="assets/mdm.png" alt="MDM.Studio" />
+        </div>
+        <div class="hotel-info">
+          <h3 class="hotel-name">MDM.Studio</h3>
+          <div class="hotel-rating">
+            <div class="hotel-stars">
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-empty" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="hotel-score">4,8</span>
+            <span class="hotel-reviews">Google</span>
+          </div>
+          <a class="hotel-link" href="https://share.google/nL0gajHqGDCHKEzPD" target="_blank" rel="noopener">
+            Ver no Google <span class="hotel-link-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bonjour Par Lu — imagem à direita -->
+      <div class="hotel-card reverse glass-panel reveal">
+        <div class="hotel-image">
+          <img src="assets/bonjur.png" alt="Bonjour Par Lu - Além da Beleza" />
+        </div>
+        <div class="hotel-info">
+          <h3 class="hotel-name">Bonjour Par Lu - Além da Beleza</h3>
+          <div class="hotel-rating">
+            <div class="hotel-stars">
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="hotel-score">5,0</span>
+            <span class="hotel-reviews">Google</span>
+          </div>
+          <a class="hotel-link" href="https://share.google/JZsL78sdQyxH3x3zn" target="_blank" rel="noopener">
+            Ver no Google <span class="hotel-link-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Carolina Miguel Beauty — imagem à esquerda -->
+      <div class="hotel-card glass-panel reveal">
+        <div class="hotel-image">
+          <img src="assets/carolinamiguel.png" alt="Carolina Miguel Beauty" />
+        </div>
+        <div class="hotel-info">
+          <h3 class="hotel-name">Carolina Miguel Beauty</h3>
+          <div class="hotel-rating">
+            <div class="hotel-stars">
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="hotel-score">4,9</span>
+            <span class="hotel-reviews">Google</span>
+          </div>
+          <a class="hotel-link" href="https://share.google/61HpgTukf5QFpDqbW" target="_blank" rel="noopener">
+            Ver no Google <span class="hotel-link-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ESSENZA e CO. — imagem à direita -->
+      <div class="hotel-card reverse glass-panel reveal">
+        <div class="hotel-image">
+          <img src="assets/essenza.png" alt="ESSENZA e CO. por Braian Silva" />
+        </div>
+        <div class="hotel-info">
+          <h3 class="hotel-name">ESSENZA e CO. por Braian Silva</h3>
+          <div class="hotel-rating">
+            <div class="hotel-stars">
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="hotel-star hotel-star-empty" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="hotel-score">4,8</span>
+            <span class="hotel-reviews">Google</span>
+          </div>
+          <a class="hotel-link" href="https://share.google/06UKwzmlh81SPpLfY" target="_blank" rel="noopener">
+            Ver no Google <span class="hotel-link-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="presentes-section" id="lista-presentes">
+    <div class="presentes-container glass-panel">
+      <h2 class="presentes-title reveal">Lista de Presentes</h2>
+      <div class="presentes-image-wrapper reveal reveal-delay-1">
+        <img src="assets/julios.png" alt="Lista de Presentes" />
+      </div>
+      <a class="presentes-btn reveal reveal-delay-2" href="https://loja.infinitepay.io/nicolas-carmona-rondon?categories=" target="_blank" rel="noopener">
+        Conferir Lista de Presentes <span class="presentes-btn-arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="recados-section" id="recados">
+    <div class="recados-container glass-panel">
+      <h2 class="recados-title reveal">Recados</h2>
+      <form class="recados-form reveal reveal-delay-1" id="recados-form">
+        <div class="recados-field">
+          <label class="recados-label" for="recado-nome">Seu nome</label>
+          <input class="recados-input" type="text" id="recado-nome" placeholder="Digite seu nome" required />
+        </div>
+        <div class="recados-field">
+          <label class="recados-label" for="recado-email">Email</label>
+          <input class="recados-input" type="email" id="recado-email" placeholder="Digite seu email" required />
+        </div>
+        <div class="recados-field">
+          <label class="recados-label" for="recado-msg">Recado</label>
+          <textarea class="recados-textarea" id="recado-msg" placeholder="Deixe seu recado para os noivos..." required></textarea>
+        </div>
+        <button type="submit" class="recados-submit">Enviar Recado</button>
+      </form>
+      <div class="recados-mensagens reveal reveal-delay-2" id="recados-lista">
+        <p class="recados-mensagens-title">Recados dos convidados</p>
+        <p class="recados-vazio" id="recados-vazio">Nenhum recado ainda. Seja o primeiro!</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function() {
+      var API_URL = 'https://script.google.com/macros/s/AKfycbwm-aXb_eCVzOwvM2vGRCTmJgoeZmlV8YQ_u_yOOMzF_ZX6nWencXhV7KnFqHLXtmmy/exec';
+      var form = document.getElementById('recados-form');
+      var lista = document.getElementById('recados-lista');
+      var vazio = document.getElementById('recados-vazio');
+      var submitBtn = form.querySelector('.recados-submit');
+
+      function escapeHtml(str) {
+        var d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+      }
+
+      function renderRecados(recados) {
+        lista.querySelectorAll('.recado-item').forEach(function(el) { el.remove(); });
+        if (recados.length === 0) {
+          vazio.style.display = 'block';
+          vazio.textContent = 'Nenhum recado ainda. Seja o primeiro!';
+          return;
+        }
+        vazio.style.display = 'none';
+        recados.forEach(function(r) {
+          var div = document.createElement('div');
+          div.className = 'recado-item';
+          div.innerHTML = '<p class="recado-autor">' + escapeHtml(r.nome) + '</p><p class="recado-texto">' + escapeHtml(r.msg) + '</p>';
+          lista.appendChild(div);
+        });
+      }
+
+      function carregarRecados() {
+        vazio.textContent = 'Carregando recados...';
+        fetch(API_URL, { redirect: 'follow' })
+          .then(function(res) { return res.json(); })
+          .then(function(data) { renderRecados(data); })
+          .catch(function() {
+            vazio.textContent = 'Erro ao carregar recados.';
+          });
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var nome = document.getElementById('recado-nome').value.trim();
+        var email = document.getElementById('recado-email').value.trim();
+        var msg = document.getElementById('recado-msg').value.trim();
+        if (!nome || !email || !msg) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+
+        fetch(API_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({ nome: nome, email: email, msg: msg }),
+        })
+          .then(function() {
+            form.reset();
+            form.style.display = 'none';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Enviar Recado';
+            setTimeout(carregarRecados, 1500);
+          })
+          .catch(function() {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Enviar Recado';
+            alert('Erro ao enviar. Tente novamente.');
+          });
+      });
+
+      carregarRecados();
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function() {
+        var size = 64;
+        var canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        var ctx = canvas.getContext('2d');
+        // Crop to center portion of the image (zoom into the monogram)
+        var cropX = img.width * 0.15;
+        var cropY = img.height * 0.18;
+        var cropW = img.width * 0.75;
+        var cropH = img.height * 0.72;
+        ctx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, size, size);
+        var link = document.getElementById('dynamic-favicon');
+        link.href = canvas.toDataURL('image/png');
+      };
+      img.src = 'assets/logo.png';
+    })();
+  </script>
+</body>
+</html>

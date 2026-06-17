@@ -382,8 +382,8 @@
       width: 33.334%;
       height: 100%;
       background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: 33.4vw 100vh;
+      background-position: center center;
+      background-size: cover;
     }
 
     .casal-foto-1 {
@@ -399,10 +399,20 @@
       background-position: right center;
     }
 
-    @media (max-width: 991px) {
-      .casal-foto {
-        background-attachment: scroll;
+    /* No celular, empilha as 3 fotos (uma sobre a outra) em vez de faixas estreitas */
+    @media (max-width: 767px) {
+      .casal-fotos-section {
+        flex-direction: column;
       }
+
+      .casal-foto {
+        width: 100%;
+        height: 33.334%;
+        background-position: center center;
+      }
+
+      .casal-foto-1 { background-position: center 30%; }
+      .casal-foto-3 { background-position: center 40%; }
     }
 
     /* Content overlay on casal-fotos (about-section style) */
@@ -475,7 +485,7 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 1.6;
-      color: #c8c8c8;
+      color: #f1ead9;
     }
 
     @media (max-width: 991px) {
@@ -964,6 +974,58 @@
         margin-bottom: 32px;
       }
     }
+    /* ── Manual dos Convidados ── */
+    .manual-section {
+      background-color: #100c18;
+      padding: 120px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .manual-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: #FBF6E8;
+      letter-spacing: 0.05em;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .manual-image-wrapper {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .manual-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 991px) {
+      .manual-section {
+        padding: 80px 20px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .manual-section {
+        padding: 60px 16px;
+      }
+
+      .manual-title {
+        margin-bottom: 40px;
+      }
+
+      .manual-image-wrapper img {
+        border-radius: 16px;
+      }
+    }
+
     /* ── Recados ── */
     .recados-section {
       background-color: #100c18;
@@ -1145,6 +1207,50 @@
         text-align: center;
       }
     }
+    /* ── Música de fundo ── */
+    .music-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background-color: rgba(236, 106, 35, 0.9);
+      color: #FBF6E8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .music-toggle:hover {
+      background-color: #ec6a23;
+      transform: scale(1.05);
+    }
+
+    .music-toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .music-toggle .icon-muted { display: none; }
+    .music-toggle.muted .icon-playing { display: none; }
+    .music-toggle.muted .icon-muted { display: block; }
+
+    @media (max-width: 479px) {
+      .music-toggle {
+        width: 46px;
+        height: 46px;
+        bottom: 16px;
+        right: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1157,7 +1263,7 @@
         <a class="nav-link" href="#hoteis">Indicações de Hotéis</a>
         <a class="nav-link" href="#saloes">Salões de Beleza</a>
         <a class="nav-link" href="#lista-presentes">Lista de Presentes</a>
-
+        <a class="nav-link" href="#manual-convidados">Sugestão aos Convidados</a>
         <a class="nav-link" href="#recados">Recados</a>
       </div>
     </div>
@@ -1624,6 +1730,13 @@
     </div>
   </section>
 
+  <section class="manual-section" id="manual-convidados">
+    <h2 class="manual-title reveal">Sugestão aos Convidados</h2>
+    <div class="manual-image-wrapper reveal reveal-delay-1">
+      <img src="assets/sugestao_convidados.png" alt="Sugestão aos Convidados" />
+    </div>
+  </section>
+
   <section class="recados-section" id="recados">
     <div class="recados-container glass-panel">
       <h2 class="recados-title reveal">Recados</h2>
@@ -1720,6 +1833,66 @@
       });
 
       carregarRecados();
+    })();
+  </script>
+
+  <audio id="bg-music" loop preload="auto">
+    <source src="assets/Time%20to%20Say%20Goodbye%20(Cello%20%26%20Piano%20Version)%20-%20Brooklyn%20Duo%20(youtube).mp3" type="audio/mpeg" />
+  </audio>
+  <button class="music-toggle" id="music-toggle" type="button" aria-label="Ativar ou desativar música">
+    <svg class="icon-playing" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+    <svg class="icon-muted" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/><line x1="3" y1="2" x2="21" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <script>
+    (function() {
+      var audio = document.getElementById('bg-music');
+      var toggle = document.getElementById('music-toggle');
+      audio.volume = 0.5;
+      var started = false;
+
+      function startMusic() {
+        if (started) return;
+        var p = audio.play();
+        if (p !== undefined) {
+          p.then(function() {
+            started = true;
+            toggle.classList.remove('muted');
+          }).catch(function() {
+            // autoplay bloqueado pelo navegador — aguarda interação do usuário
+          });
+        }
+      }
+
+      // Tenta iniciar assim que a página carrega.
+      // OBS: navegadores bloqueiam áudio com som no carregamento/F5 até haver
+      // uma interação do usuário — não há como forçar autoplay com som.
+      startMusic();
+
+      // Fallback: inicia no primeiro gesto válido do usuário.
+      // (scroll NÃO libera áudio nos navegadores; só clique, toque, ponteiro ou tecla)
+      var events = ['pointerdown', 'click', 'keydown', 'touchstart'];
+      function onFirstInteraction() {
+        startMusic();
+        events.forEach(function(ev) {
+          window.removeEventListener(ev, onFirstInteraction);
+        });
+      }
+      events.forEach(function(ev) {
+        window.addEventListener(ev, onFirstInteraction, { passive: true });
+      });
+
+      // Botão liga/desliga
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (audio.paused) {
+          audio.play();
+          toggle.classList.remove('muted');
+        } else {
+          audio.pause();
+          toggle.classList.add('muted');
+        }
+        started = true;
+      });
     })();
   </script>
 

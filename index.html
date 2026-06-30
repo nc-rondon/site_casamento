@@ -974,6 +974,208 @@
         margin-bottom: 32px;
       }
     }
+
+    /* ── Confirme Sua Presença ── */
+    .confirmacao-section {
+      background-color: #100c18;
+      padding: 120px 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .confirmacao-container {
+      max-width: 800px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 40px;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    /* Luzes animadas dentro do card */
+    .confirmacao-container::after {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      top: -120px;
+      right: -100px;
+      border-radius: 50%;
+      filter: blur(60px);
+      background: radial-gradient(circle, rgba(37, 211, 102, 0.4), transparent 70%);
+      animation: confirm-glow-a 9s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes confirm-glow-a {
+      0%   { transform: translate(0, 0) scale(1);     opacity: 0.5; }
+      100% { transform: translate(-90px, 80px) scale(1.25); opacity: 0.9; }
+    }
+
+    /* Partículas de luz flutuantes (dentro do card) */
+    .confirmacao-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .confirmacao-particles span {
+      position: absolute;
+      bottom: -20px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(251, 246, 232, 0.9);
+      box-shadow: 0 0 12px 3px rgba(251, 246, 232, 0.6);
+      animation: confirm-float linear infinite;
+      opacity: 0;
+    }
+
+    .confirmacao-particles span:nth-child(1)  { left: 8%;  width: 6px;  height: 6px;  animation-duration: 9s;  animation-delay: 0s; }
+    .confirmacao-particles span:nth-child(2)  { left: 20%; width: 4px;  height: 4px;  animation-duration: 12s; animation-delay: 2s; }
+    .confirmacao-particles span:nth-child(3)  { left: 33%; width: 9px;  height: 9px;  animation-duration: 8s;  animation-delay: 1s; background: rgba(37, 211, 102, 0.9); box-shadow: 0 0 12px 3px rgba(37, 211, 102, 0.6); }
+    .confirmacao-particles span:nth-child(4)  { left: 47%; width: 5px;  height: 5px;  animation-duration: 13s; animation-delay: 4s; }
+    .confirmacao-particles span:nth-child(5)  { left: 60%; width: 7px;  height: 7px;  animation-duration: 10s; animation-delay: 1.5s; }
+    .confirmacao-particles span:nth-child(6)  { left: 72%; width: 4px;  height: 4px;  animation-duration: 14s; animation-delay: 3s; background: rgba(236, 106, 35, 0.9); box-shadow: 0 0 12px 3px rgba(236, 106, 35, 0.6); }
+    .confirmacao-particles span:nth-child(7)  { left: 85%; width: 8px;  height: 8px;  animation-duration: 9s;  animation-delay: 5s; }
+    .confirmacao-particles span:nth-child(8)  { left: 92%; width: 5px;  height: 5px;  animation-duration: 11s; animation-delay: 2.5s; }
+
+    @keyframes confirm-float {
+      0%   { transform: translateY(0) scale(0.6);   opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateY(-300px) scale(1); opacity: 0; }
+    }
+
+    .confirmacao-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: #FBF6E8;
+      letter-spacing: 0.05em;
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      animation: confirm-title-glow 3.5s ease-in-out infinite;
+    }
+
+    @keyframes confirm-title-glow {
+      0%, 100% { text-shadow: 0 0 12px rgba(251, 246, 232, 0.25), 0 0 24px rgba(37, 211, 102, 0.15); }
+      50%      { text-shadow: 0 0 22px rgba(251, 246, 232, 0.55), 0 0 44px rgba(37, 211, 102, 0.4); }
+    }
+
+    .confirmacao-text {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 18px;
+      color: #FBF6E8;
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .confirmacao-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 400px;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #FBF6E8;
+      text-decoration: none;
+      padding: 16px 32px;
+      background-color: #25D366;
+      border: none;
+      border-radius: 12px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      animation: confirm-btn-pulse 2.2s ease-in-out infinite;
+    }
+
+    /* Brilho que percorre o botão */
+    .confirmacao-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+      transform: skewX(-20deg);
+      animation: confirm-btn-shine 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes confirm-btn-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5), 0 6px 20px rgba(37, 211, 102, 0.25); }
+      50%      { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0), 0 6px 20px rgba(37, 211, 102, 0.45); }
+    }
+
+    @keyframes confirm-btn-shine {
+      0%   { left: -120%; }
+      60%  { left: 140%; }
+      100% { left: 140%; }
+    }
+
+    .confirmacao-btn:hover {
+      background-color: #1da851;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 36px rgba(37, 211, 102, 0.5);
+    }
+
+    .confirmacao-btn-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .confirmacao-btn:hover .confirmacao-btn-arrow {
+      transform: translateX(4px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .confirmacao-container::after,
+      .confirmacao-particles span,
+      .confirmacao-title,
+      .confirmacao-btn,
+      .confirmacao-btn::before {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .confirmacao-section {
+        padding: 80px 20px;
+      }
+
+      .confirmacao-container {
+        padding: 36px 30px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .confirmacao-section {
+        padding: 60px 16px;
+      }
+
+      .confirmacao-container {
+        padding: 28px 24px;
+      }
+
+      .confirmacao-text {
+        font-size: 16px;
+      }
+    }
     /* ── Manual dos Convidados ── */
     .manual-section {
       background-color: #100c18;
@@ -1263,6 +1465,7 @@
         <a class="nav-link" href="#hoteis">Indicações de Hotéis</a>
         <a class="nav-link" href="#saloes">Salões de Beleza</a>
         <a class="nav-link" href="#lista-presentes">Lista de Presentes</a>
+        <a class="nav-link" href="#confirme-presenca">Confirme Sua Presença</a>
         <a class="nav-link" href="#manual-convidados">Sugestão aos Convidados</a>
         <a class="nav-link" href="#recados">Recados</a>
       </div>
@@ -1722,10 +1925,24 @@
     <div class="presentes-container glass-panel">
       <h2 class="presentes-title reveal">Lista de Presentes</h2>
       <div class="presentes-image-wrapper reveal reveal-delay-1">
-        <img src="assets/julios.png" alt="Lista de Presentes" />
+        <img src="assets/presentes.png" alt="Lista de Presentes" />
       </div>
       <a class="presentes-btn reveal reveal-delay-2" href="https://loja.infinitepay.io/nicolas-carmona-rondon?categories=" target="_blank" rel="noopener">
         Conferir Lista de Presentes <span class="presentes-btn-arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="confirmacao-section" id="confirme-presenca">
+    <div class="confirmacao-container glass-panel">
+      <div class="confirmacao-particles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <h2 class="confirmacao-title reveal">Confirme Sua Presença</h2>
+      <p class="confirmacao-text reveal reveal-delay-1">Clique no link para confirmar sua presença</p>
+      <a class="confirmacao-btn reveal reveal-delay-2" href="https://wa.me/5515981544042?text=Vim%20atrav%C3%A9z%20do%20site%20para%20confirmar%20minha%20presen%C3%A7a%20para%20o%20casamento%20de%20Giovanna%20%26%20N%C3%ADcolas%2012-12-2026." target="_blank" rel="noopener">
+        Confirmar pelo WhatsApp <span class="confirmacao-btn-arrow">&rarr;</span>
       </a>
     </div>
   </section>
